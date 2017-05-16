@@ -14,5 +14,6 @@ apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools
 easy_install pip
 
 dconf load /org/compiz/profiles/unity/plugins/grid/ < ./grid-settings.conf
+dconf load /org/compiz/profiles/unity/plugins/grid/ < ./dconf-datetime.conf
 gconftool-2 --load ./lock_screen_key.xml
 
