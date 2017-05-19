@@ -15,7 +15,7 @@ sudo add-apt-repository ppa:webupd8team/sublime-text-3
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
-apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer
+apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer curl
 
 #install pip
 easy_install pip
@@ -24,7 +24,9 @@ dconf load /org/compiz/profiles/unity/plugins/grid/ < ./grid-settings.conf
 dconf load /org/compiz/profiles/unity/plugins/grid/ < ./dconf-datetime.conf
 gconftool-2 --load ./lock_screen_key.xml
 
-#install chrome
+#install draftsight
+wget www.draftsight.com/download-linux-ubuntu -O draftSight.deb
+dpkg -i ./draftsight.deb
 
 #Move my application shortcuts to where they should go
 cp ./org.gnome.Screenshot.desktop ~/.local/share/applications/screenshot.desktop
