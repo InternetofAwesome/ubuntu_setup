@@ -15,7 +15,7 @@ sudo add-apt-repository ppa:webupd8team/sublime-text-3
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
-apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer curl
+apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer curl gparted
 
 #install pip
 easy_install pip
