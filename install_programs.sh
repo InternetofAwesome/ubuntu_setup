@@ -38,7 +38,10 @@ dpkg -i ./draftsight.deb
 cp ./org.gnome.Screenshot.desktop ~/.local/share/applications/screenshot.desktop
 
 #install eclipse
-curl -k https://raw.githubusercontent.com/budhash/install-eclipse/master/install-eclipse > install-eclipse
-chmod +x install-eclipse
-./install-eclipse /opt/eclipse
+base="http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release"
+ver=$(curl $base/release.xml | sed -n 's/.present.\(.*\)..present./\1/p')
+ver_url="$base/$ver/eclipse-cpp-${ver//'/'/'-'}-linux-gtk-x86_64.tar.gz"
+wget $ver_url -O eclipse.tar.gz
+tar xfv ./eclipse.tar.gz
+mv ./eclipse /opt/eclipse
 desktop-file-install ./eclipse.desktop
