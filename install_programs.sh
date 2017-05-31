@@ -18,10 +18,13 @@ sudo add-apt-repository ppa:webupd8team/java -y
 echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
 echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 
+#arm compiler ppas
+sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa -y
+
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
-apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer curl gparted oracle-java8-installer
+apt-get install -y gimp inkscape compizconfig-settings-manager python-setuptools python-dev build-essential minicom git gconf-editor dconf-editor google-chrome-stable submlime-text-installer curl gparted oracle-java8-installer gcc-arm-embedded
 
 #install pip
 easy_install pip
