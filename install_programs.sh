@@ -73,5 +73,5 @@ ver=$(curl $base/release.xml | sed -n 's/.present.\(.*\)..present./\1/p')
 ver_url="$base/$ver/eclipse-cpp-${ver//'/'/'-'}-linux-gtk-x86_64.tar.gz"
 wget $ver_url -O eclipse.tar.gz
 tar xfv ./eclipse.tar.gz
-mv ./eclipse /opt/eclipse
+mv ./eclipse /opt/
 desktop-file-install ./eclipse.desktop
