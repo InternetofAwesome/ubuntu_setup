@@ -26,6 +26,9 @@ PKGS+=" google-chrome-stable"
 #add sublime ppa
 sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y
 PKGS+=" sublime-text-installer"
+#replace gedit with sublime as default editor
+sudo sed -i 's/gedit.desktop/sublime-text.desktop/g' /etc/gnome/defaults.list  
+
 
 #add java ppa
 sudo add-apt-repository ppa:webupd8team/java -y
