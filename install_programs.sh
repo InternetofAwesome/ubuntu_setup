@@ -38,6 +38,14 @@ PKGS+=" oracle-java8-installer"
 sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa -y
 PKGS+=" gcc-arm-embedded"
 
+#virtualbox and extensions
+ver=$(curl http://download.virtualbox.org/virtualbox/LATEST.TXT)
+echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" > /etc/apt/sources.list.d/virtualbox.list
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -y -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -y -
+wget http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-$ver.vbox-extpack -O vbox-extension.vbox.extpack
+PKGS+=virtualbox-$(echo $ver | sed -n 's/\([0-9]\+\.[0-9]\+\)\..*/\1/p')
+
 #airplay casting ability
 ver=$(curl http://jcenter.bintray.com/org/jmdns/jmdns/maven-metadata.xml | sed  -n 's/.\+latest[^0-9]\+\([0-9\.-]\+\)..latest./\1/p')
 wget http://jcenter.bintray.com/org/jmdns/jmdns/$ver/jmdns-$ver.jar -O ~/jmdns.jar
@@ -51,7 +59,10 @@ desktop-file-install ./open-airplay.desktop
 apt-get update
 apt-get -y upgrade
 apt-get -y dist-upgrade
-apt-get install -y $PKGS
+apt-get install -y --allow-unauthenticated $PKGS
+
+#install virtualbox extension
+echo y | vboxmanage extpack install './vbox-extension.vbox.extpack'
 
 #install pip
 easy_install pip
