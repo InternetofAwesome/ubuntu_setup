@@ -5,6 +5,8 @@ if [ "$(whoami)" != "root" ]; then
 	exit
 fi
 
+cat ./inputrc >> /etc/inputrc
+
 PKGS="gimp \
 	inkscape \
 	compizconfig-settings-manager \
