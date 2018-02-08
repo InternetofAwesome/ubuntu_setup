@@ -7,6 +7,9 @@ fi
 
 cat ./inputrc >> /etc/inputrc
 
+#give me access to my serial ports.
+usermod -aG dialout $USER
+
 PKGS="gimp \
 	inkscape \
 	compizconfig-settings-manager \
