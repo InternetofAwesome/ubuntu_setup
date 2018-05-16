@@ -1,5 +1,8 @@
 #!/bin/bash 
 
+set -E
+trap 'echo Failed on line: $LINENO at command: $BASH_COMMAND && exit $?' ERR
+
 if [ "$(whoami)" != "root" ]; then
 	echo "you must run this as root"
 	exit
