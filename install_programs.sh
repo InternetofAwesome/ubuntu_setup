@@ -32,33 +32,33 @@ PKGS="gimp \
 	gparted"
 
 #add chrome ppa
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
 PKGS+=" google-chrome-stable"
 
 #add sublime ppa
-sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y
+add-apt-repository ppa:webupd8team/sublime-text-3 -y
 PKGS+=" sublime-text-installer"
 #replace gedit with sublime as default editor
-sudo sed -i 's/gedit.desktop/sublime-text.desktop/g' /etc/gnome/defaults.list  
+sed -i 's/gedit.desktop/sublime-text.desktop/g' /etc/gnome/defaults.list  
 
 
 #add java ppa
-sudo add-apt-repository ppa:webupd8team/java -y
+add-apt-repository ppa:webupd8team/java -y
 #say yes to EULAs.
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
 PKGS+=" oracle-java8-installer"
 
 #arm compiler ppas
-sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa -y
+add-apt-repository ppa:team-gcc-arm-embedded/ppa -y
 PKGS+=" gcc-arm-embedded"
 
 #virtualbox and extensions
 ver=$(curl http://download.virtualbox.org/virtualbox/LATEST.TXT)
 echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" > /etc/apt/sources.list.d/virtualbox.list
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 wget http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-$ver.vbox-extpack -O vbox-extension.vbox.extpack
 PKGS+=virtualbox-$(echo $ver | sed -n 's/\([0-9]\+\.[0-9]\+\)\..*/\1/p')
 
