@@ -5,7 +5,12 @@ if [ "$(whoami)" != "root" ]; then
 	exit
 fi
 
+#support ctrl-backspace and arrows
 cat ./inputrc >> /etc/inputrc
+
+#configure synaptics touchpad
+cp ./50-synaptics.conf /etc/X11/xorg.conf.d/
+chown root:root /etc/X11/xorg.conf.d/50-synaptics.conf
 
 #give me access to my serial ports.
 usermod -aG dialout $USER
