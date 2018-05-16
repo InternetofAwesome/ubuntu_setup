@@ -5,15 +5,15 @@ trap 'echo Failed on line: $LINENO at command: $BASH_COMMAND && exit $?' ERR
 
 if [ "$(whoami)" != "root" ]; then
 	echo "you must run this as root"
-	exit
+	exit 1
 fi
 
 #support ctrl-backspace and arrows
 cat ./inputrc >> /etc/inputrc
 
 #configure synaptics touchpad
-cp ./50-synaptics.conf /etc/X11/xorg.conf.d/
-chown root:root /etc/X11/xorg.conf.d/50-synaptics.conf
+cp ./50-synaptics.conf /usr/share/X11/xorg.conf.d/
+chown root:root /usr/share/X11/xorg.conf.d/50-synaptics.conf
 
 #give me access to my serial ports.
 usermod -aG dialout $USER
@@ -57,8 +57,8 @@ PKGS+=" gcc-arm-embedded"
 #virtualbox and extensions
 ver=$(curl http://download.virtualbox.org/virtualbox/LATEST.TXT)
 echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" > /etc/apt/sources.list.d/virtualbox.list
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -y -
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -y -
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
 wget http://download.virtualbox.org/virtualbox/5.1.26/Oracle_VM_VirtualBox_Extension_Pack-$ver.vbox-extpack -O vbox-extension.vbox.extpack
 PKGS+=virtualbox-$(echo $ver | sed -n 's/\([0-9]\+\.[0-9]\+\)\..*/\1/p')
 
